@@ -13,8 +13,8 @@ class MerchantFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'website' => $this->faker->word(),
+            'name' => $this->faker->company(),
+            'website' => $this->faker->url(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

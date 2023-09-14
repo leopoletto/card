@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\CreateCreditCardController;
+use App\Http\Controllers\CreateCardSwitcherTaskController;
+use App\Http\Controllers\CreateCardController;
+use App\Http\Controllers\ListMerchantsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterUserController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\UpdateCardSwitcherTaskStatusController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,5 +23,9 @@ Route::post('/users', RegisterUserController::class);
 Route::post('/login', LoginController::class);
 
 Route::middleware('auth:sanctum')->group(function (){
-    Route::post('/credit-cards', CreateCreditCardController::class);
+    Route::post('/credit-cards', CreateCardController::class);
+    Route::get('/merchants', ListMerchantsController::class);
+    Route::post('/card-switcher-tasks', CreateCardSwitcherTaskController::class);
+    Route::patch('/card-switcher-tasks/{cardSwitcherTask}/fail', [UpdateCardSwitcherTaskStatusController::class, 'fail']);
+    Route::patch('/card-switcher-tasks/{cardSwitcherTask}/finalize', [UpdateCardSwitcherTaskStatusController::class, 'finalize']);
 });

@@ -41,8 +41,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function creditCards(): HasMany
+    public function cards(): HasMany
     {
-        return $this->hasMany(CreditCard::class);
+        return $this->hasMany(Card::class);
+    }
+
+    public function cardSwitcherTasks(): HasMany
+    {
+        return $this->hasMany(CardSwitcherTask::class);
     }
 }

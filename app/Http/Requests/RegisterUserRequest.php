@@ -16,12 +16,4 @@ class RegisterUserRequest extends FormRequest
             'password' => ['required', Password::defaults()],
         ];
     }
-
-    protected function failedValidation(Validator $validator): void
-    {
-        throw new HttpResponseException(response()->json([
-            'errors' => $validator->errors(),
-            'status' => true
-        ], 422));
-    }
 }

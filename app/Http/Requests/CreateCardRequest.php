@@ -4,9 +4,10 @@ namespace App\Http\Requests;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Validator;
 
-class CreateCreditCardRequest extends FormRequest
+class CreateCardRequest extends FormRequest
 {
     public function rules(): array
     {
@@ -31,7 +32,11 @@ class CreateCreditCardRequest extends FormRequest
                     );
                 }
 
+                $number = Str::of($this->number);
+                $lastDigits = 4;
+
                 $this->expiration = $date;
+                $this->last_digits = $number->substr($number->length() - $lastDigits, $lastDigits);
             }
         ];
     }

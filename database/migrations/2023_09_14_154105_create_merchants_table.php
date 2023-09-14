@@ -9,8 +9,8 @@ return new class extends Migration {
     {
         Schema::create('merchants', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('website');
+            $table->string('name', 100);
+            $table->string('website', 180);
             $table->timestamps();
         });
     }
