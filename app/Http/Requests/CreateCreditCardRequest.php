@@ -11,10 +11,10 @@ class CreateCreditCardRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'number' => ['required', 'max:20'],
+            'number' => ['required', 'between:13,19'],
             'expiration_year' => ['required', 'date_format:Y'],
             'expiration_month' => ['required', 'date_format:m'],
-            'cvv' => ['required', 'max:4'],
+            'cvv' => ['required', 'between:3,4'],
         ];
     }
 

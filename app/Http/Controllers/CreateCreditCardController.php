@@ -19,11 +19,11 @@ class CreateCreditCardController extends Controller
             ]);
 
         $number = Str::of($creditCard->number);
-        $showOnly = 4;
+        $lastDigits = 4;
 
         return response()->json([
             'id' => $creditCard->id,
-            'last_digits' => $number->substr($number->length() - $showOnly, $showOnly),
+            'last_digits' => $number->substr($number->length() - $lastDigits, $lastDigits),
             'user_id' => $creditCard->user_id
         ]);
     }
