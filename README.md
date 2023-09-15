@@ -4,11 +4,13 @@
 
 Clone the repository: `git clone git@github.com:leopoletto/card.git leopoletto`
 
-Install dependencies: `composer install & npm install`  
+Install dependencies: `composer install & npm install`
 
-Create the Docker container using Laravel Sail: `./vendor/bin/sail up`
+Clone and rename the `.env.example` file to `.env`
 
-Clone and rename the `.env.example` file to `.env` and run: `./vendor/bin/sail artisan key:generate`
+Create the Docker container using Laravel Sail: `./vendor/bin/sail up -d`
+
+Generate Key: `./vendor/bin/sail artisan key:generate`
 
 Run the migration: `./vendor/bin/sail artisan migrate`
 
