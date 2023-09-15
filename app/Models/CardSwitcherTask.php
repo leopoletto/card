@@ -41,7 +41,7 @@ class CardSwitcherTask extends Model
                 ->first();
 
             if ($previousTask) {
-                $task->previousCard()->associate($previousTask->card);
+                $task->previousCard()->associate($previousTask->card)->save();
             }
         });
     }
