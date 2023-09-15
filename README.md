@@ -2,17 +2,17 @@
 
 ## Setup
 
-> Clone the repository: `git clone git@github.com:leopoletto/card.git leopoletto`
+Clone the repository: `git clone git@github.com:leopoletto/card.git leopoletto`
 
-> Install dependencies: `composer install & npm install`  
+Install dependencies: `composer install & npm install`  
 
-> Create the Docker container using Laravel Sail: `./vendor/bin/sail up`
+Create the Docker container using Laravel Sail: `./vendor/bin/sail up`
 
-> Clone and rename the `.env.example` file to `.env` and run: `./vendor/bin/sail artisan key:generate`
+Clone and rename the `.env.example` file to `.env` and run: `./vendor/bin/sail artisan key:generate`
 
-> Run the migration: `./vendor/bin/sail artisan migrate`
+Run the migration: `./vendor/bin/sail artisan migrate`
 
-> Seed the database with merchants: `./vendor/bin/sail artisan db:seed`
+Seed the database with merchants: `./vendor/bin/sail artisan db:seed`
 
 ## Running the API
 
