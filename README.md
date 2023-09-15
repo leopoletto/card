@@ -31,9 +31,9 @@ curl --request POST \
 	"password": "password"
 }'
 ```
-### Login user 
+### Login user
+> Use the e-mail and password (It automatically fills the token value for the next requests)
 
-Use the e-mail and password (It automatically fills the token value for the next requests)
 ```CURL
 curl --request POST \
   --url http://localhost/api/login \
@@ -46,9 +46,9 @@ curl --request POST \
 }'
 ```
 
-###  Create a card 
-
-Save the card id for future use
+###  Create a card
+> Save the card id for future use
+> 
 ```CURL
 curl --request POST \
   --url 'http://localhost/api/cards?=' \
@@ -65,7 +65,7 @@ curl --request POST \
 ```
 
 ### Get merchants 
-Save one id future use
+> Save one id future use
 
 ```CURL
 curl --request GET \
