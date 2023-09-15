@@ -9,11 +9,9 @@ class CreateCardSwitcherTaskController extends Controller
 {
     public function __invoke(CreateCardSwitcherTaskRequest $request): CardSwitcherTask
     {
-        $task = CardSwitcherTask::create([
+        return CardSwitcherTask::create([
             'card_id' => $request->validated('card_id'),
             'merchant_id' => $request->validated('merchant_id'),
         ]);
-
-        return $task;
     }
 }

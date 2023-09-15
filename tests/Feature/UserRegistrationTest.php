@@ -17,7 +17,7 @@ class UserRegistrationTest extends TestCase
         $response = $this->post('/api/users', [
             'email' => 'acme@example.com',
             'password' => 'password'
-        ]);
+        ], ['Accept' => 'Application/Json']);
 
         $response->assertCreated();
 
