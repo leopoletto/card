@@ -18,7 +18,7 @@ class CreateCardTest extends TestCase
         $this->actingAs($user)
             ->assertCount(0, $user->cards);
 
-        $response = $this->post('/api/credit-cards', [
+        $response = $this->post('/api/cards', [
             "number" => "4491662671878085",
             "expiration_year" => today()->addYear()->year,
             "expiration_month" => today()->addYear()->month,

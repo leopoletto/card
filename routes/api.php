@@ -24,7 +24,7 @@ Route::post('/users', RegisterUserController::class);
 Route::post('/login', LoginController::class);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/credit-cards', CreateCardController::class);
+    Route::post('/cards', CreateCardController::class);
     Route::get('/merchants', ListMerchantsController::class);
     Route::post('/card-switcher-tasks', CreateCardSwitcherTaskController::class);
     Route::patch('/card-switcher-tasks/{cardSwitcherTask}/fail', [UpdateCardSwitcherTaskStatusController::class, 'fail']);

@@ -1,66 +1,124 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Knot API Test
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Setup
 
-## About Laravel
+> Clone the repository: `git clone git@github.com:leopoletto/card.git leopoletto`
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+> Install dependencies: `composer install & npm install`  
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+> Create the Docker container using Laravel Sail: `./vendor/bin/sail up`
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+> Clone and rename the `.env.example` file to `.env` and run: `./vendor/bin/sail artisan key:generate`
 
-## Learning Laravel
+> Run the migration: `./vendor/bin/sail artisan migrate`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+> Seed the database with merchants: `./vendor/bin/sail artisan db:seed`
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Running the API
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+> Import the `Insomnia.json` file to Insomnia app which contains all the endpoints in the correct order.
 
-## Laravel Sponsors
+###  Register user 
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```CURL
+curl --request POST \
+  --url http://localhost/api/users \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/2023.5.8' \
+  --data '{
+	"email": "acme@example.com",
+	"password": "password"
+}'
+```
+### Login user 
 
-### Premium Partners
+Use the e-mail and password (It automatically fills the token value for the next requests)
+```CURL
+curl --request POST \
+  --url http://localhost/api/login \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/2023.5.8' \
+  --data '{
+	"email": "acme@example.com",
+	"password": "password"
+}'
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+###  Create a card 
 
-## Contributing
+Save the card id for future use
+```CURL
+curl --request POST \
+  --url 'http://localhost/api/cards?=' \
+  --header 'Accept: Application/Json' \
+  --header 'Authorization: Bearer 444|O6vfeTEyg6NT8xFB2TsSAqsElj5lPPBC47fWKUqhb51bdc8b' \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/2023.5.8' \
+  --data '{
+	"number": "4491662671878085",
+	"expiration_year": "2023",
+	"expiration_month": "12",
+	"cvv": "974"
+}'
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Get merchants 
+Save one id future use
 
-## Code of Conduct
+```CURL
+curl --request GET \
+  --url 'http://localhost/api/merchants?cursor=eyJtZXJjaGFudHMuaWQiOjIsIl9wb2ludHNUb05leHRJdGVtcyI6dHJ1ZX0' \
+  --header 'Accept: Application/Json' \
+  --header 'Authorization: Bearer 444|O6vfeTEyg6NT8xFB2TsSAqsElj5lPPBC47fWKUqhb51bdc8b' \
+  --header 'User-Agent: insomnia/2023.5.8'
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Create a card switcher task
 
-## Security Vulnerabilities
+```CURL
+curl --request POST \
+   --url 'http://localhost/api/card-switcher-tasks?=' \
+   --header 'Accept: Application/Json' \
+   --header 'Authorization: Bearer 444|O6vfeTEyg6NT8xFB2TsSAqsElj5lPPBC47fWKUqhb51bdc8b' \
+   --header 'Content-Type: application/json' \
+   --header 'User-Agent: insomnia/2023.5.8' \
+   --data '{
+       "card_id": 4,
+       "merchant_id": 2
+   }
+```
+### Update the card switcher task status to `finished`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```CURL
+curl --request PATCH \
+--url 'http://localhost/api/card-switcher-tasks/17/finalize?=' \
+--header 'Accept: Application/Json' \
+--header 'Authorization: Bearer 444|O6vfeTEyg6NT8xFB2TsSAqsElj5lPPBC47fWKUqhb51bdc8b' \
+--header 'User-Agent: insomnia/2023.5.8'
+```
 
-## License
+### Update the card switcher task status to `failed`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```CURL
+curl --request PATCH \
+  --url 'http://localhost/api/card-switcher-tasks/17/fail?=' \
+  --header 'Accept: Application/Json' \
+  --header 'Authorization: Bearer 444|O6vfeTEyg6NT8xFB2TsSAqsElj5lPPBC47fWKUqhb51bdc8b' \
+  --header 'User-Agent: insomnia/2023.5.8'
+```
+
+### Get the latest finished card switcher task by card and merchant 
+
+```CURL
+curl --request GET \
+  --url http://localhost/api/latest-card-switcher-tasks \
+  --header 'Accept: Application/Json' \
+  --header 'Authorization: Bearer 444|O6vfeTEyg6NT8xFB2TsSAqsElj5lPPBC47fWKUqhb51bdc8b' \
+  --header 'User-Agent: insomnia/2023.5.8'
+```
+
+
+
+
